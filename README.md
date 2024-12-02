@@ -21,20 +21,24 @@ void decoder(const char* );
 ```bash
 gcc -c caesar_cipher.c # caesar_cipher.o 생성
 ar -r libcaesar.a caesar_cipher.o # libcaesar.a 생성
+gcc -static test.c -L. -lcaesar # static 링킹
 ```
+<img width="545" alt="스크린샷 2024-12-03 오전 12 05 13" src="https://github.com/user-attachments/assets/166364a0-ea49-4536-a174-23926bde282c">
+
 
 ### Shared Library
 ```bash
 gcc -c -fpic caesar_cipher.c # caesar_cipher.o 생성 (position-independent가 포함됨)
 gcc -shared -o libcaesar.so caesar_cipher.o # libcaesar.so 생성
 gcc test.c -L. -lcaesar # test.c와 liacaesar.so를 링킹하여 실행파일 생성
+export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH # 공유라이브러리 경로 설정
 ./a.out # 실행
 ```
-<img width="457" alt="스크린샷 2024-11-29 오전 12 00 10" src="https://github.com/user-attachments/assets/77e50b1f-551d-4fd7-b187-272296161e2a">
+<img width="624" alt="스크린샷 2024-12-03 오전 12 15 21" src="https://github.com/user-attachments/assets/b5130231-e21f-45ce-98f7-87c8a0a4dd28">
 
 ### Run-Time Linking
 ```bash
 gcc -rdynamic -o runtime test_run_time.c -ldl # run-time linking용 실행파일 생성
 ./runtime # 실행
 ```
-<img width="452" alt="스크린샷 2024-11-29 오전 12 14 08" src="https://github.com/user-attachments/assets/7c6f0005-e639-43f1-8786-123b4f9cbf06">
+<img width="668" alt="스크린샷 2024-12-03 오전 12 20 36" src="https://github.com/user-attachments/assets/077c9951-0b93-498b-b160-2a0a36f2f631">
